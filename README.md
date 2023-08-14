@@ -5,7 +5,7 @@
 ## Spec
 
 - nestjs, graphql, typescript
-- mysql
+- mysql, typeorm
 - class-validator, class-transformer, ts-jenum, dayjs
 
 ## Installation
