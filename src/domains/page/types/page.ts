@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { PageEntity } from '../../infra/repository';
+import { PageEntity } from '../../../infra/repository';
 
 @ObjectType()
 export class Page {

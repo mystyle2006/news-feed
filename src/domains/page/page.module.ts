@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { PageResolver } from './page.resolver';
-import { PageRepoModule } from '../infra/repository';
+import { PageRepoModule } from '../../infra/repository';
 import { PageService } from './page.service';
 
 @Module({

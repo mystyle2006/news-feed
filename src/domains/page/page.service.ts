@@ -3,7 +3,7 @@ import {
   PageEntity,
   PageRepoInterface,
   PageRepoInterfaceName,
-} from '../infra/repository';
+} from '../../infra/repository';
 import { Page, PageInput } from './types';
 
 @Injectable()
