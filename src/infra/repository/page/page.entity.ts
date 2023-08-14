@@ -1,8 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { CommonEntity } from '../common.entity';
 
 @Entity('page')
 @Unique(['regionName', 'schoolName'])
-export class PageEntity {
+export class PageEntity extends CommonEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -20,5 +21,5 @@ export class PageEntity {
     type: 'varchar',
     width: 255,
   })
-  schoolName: boolean;
+  schoolName: string;
 }
