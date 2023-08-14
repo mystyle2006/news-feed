@@ -13,12 +13,11 @@ export class PageService {
     private readonly pageRepository: PageRepoInterface,
   ) {}
 
-  async createPage(input: PageInput): Promise<Page> {
+  async createPage(input: PageInput): Promise<PageEntity> {
     const entity = new PageEntity();
     entity.regionName = input.regionName;
     entity.schoolName = input.schoolName;
 
-    const newPage = await this.pageRepository.save(entity);
-    return Page.from(newPage);
+    return await this.pageRepository.save(entity);
   }
 }
