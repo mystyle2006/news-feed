@@ -10,7 +10,7 @@ export class PageResolver {
     private readonly service: PageService,
     private readonly subscribeService: SubscribeService,
   ) {}
-  @Query(() => [Page])
+  @Query(() => [Page], { description: '구독 중인 페이지 목록 가져오기' })
   async pages(
     @Args('studentId', { type: () => ID }) studentId: string,
   ): Promise<Page[]> {

@@ -8,7 +8,7 @@ import { Page } from '../page/types';
 export class TopicResolver {
   constructor(private readonly service: TopicService) {}
 
-  @Query(() => [Topic])
+  @Query(() => [Topic], { description: '구독 중인 페이지 토픽 목록 가져오기' })
   async topics(
     @Args('studentId', { type: () => ID }) studentId: string,
     @Args('pageId', { type: () => ID }) pageId: string,
