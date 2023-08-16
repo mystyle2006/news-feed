@@ -6,6 +6,9 @@ import {
   TopicMemoryRepo,
   PageRepoInterface,
   PageEntity,
+  SubscribeRepoInterfaceName,
+  SubscribeRepo,
+  SubscribeMemoryRepo,
 } from '../../infra/repository';
 import { TopicService } from './topic.service';
 import { TopicInput } from './types';
@@ -27,6 +30,10 @@ describe('topic.service.ts', () => {
         {
           provide: TopicRepoInterfaceName,
           useClass: TopicMemoryRepo,
+        },
+        {
+          provide: SubscribeRepoInterfaceName,
+          useClass: SubscribeMemoryRepo,
         },
       ],
     }).compile();
