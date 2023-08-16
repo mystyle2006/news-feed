@@ -3,6 +3,8 @@ import { v1 as uuid } from 'uuid';
 import { TopicRepoInterface } from './topic.repo.interface';
 import { TopicEntity } from './topic.entity';
 import * as dayjs from 'dayjs';
+import { UpdateResult } from 'typeorm';
+import { QueryResult } from 'typeorm/query-runner/QueryResult';
 @Injectable()
 export class TopicMemoryRepo implements TopicRepoInterface {
   store: TopicEntity[] = [];
@@ -34,5 +36,23 @@ export class TopicMemoryRepo implements TopicRepoInterface {
     });
 
     return this.store.find((topic) => topic.id === entity.id);
+  }
+
+  async update(
+    id: string,
+    partialEntity: Partial<TopicEntity>,
+  ): Promise<UpdateResult> {
+    this.store = this.store.map((topic) => {
+      if (topic.id === id) {
+        topic.content = partialEntity.content;
+        return topic;
+      }
+
+      return topic;
+    });
+
+    const queryResult = new QueryResult();
+    queryResult.affected = 1;
+    return UpdateResult.from(queryResult);
   }
 }
