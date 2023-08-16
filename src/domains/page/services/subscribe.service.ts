@@ -42,4 +42,10 @@ export class SubscribeService {
     );
     return '구독되었습니다.';
   }
+
+  async cancelSubscribe(subscribeId: string): Promise<string> {
+    await this.subscribeRepository.findOneByIdOrThrow(subscribeId);
+    await this.subscribeRepository.cancel(subscribeId);
+    return '취소되었습니다.';
+  }
 }

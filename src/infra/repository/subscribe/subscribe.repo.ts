@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { SubscribeRepoInterface } from './subscribe.repo.interface';
 import { SubscribeEntity } from './subscribe.entity';
 import { DataSource, Repository } from 'typeorm';
+import * as dayjs from 'dayjs';
 
 @Injectable()
 export class SubscribeRepo
@@ -30,6 +31,27 @@ export class SubscribeRepo
         studentId,
       },
       relations: ['page'],
+    });
+  }
+
+  async findOneByIdOrThrow(subscribeId: string): Promise<SubscribeEntity> {
+    const entity = await this.findOneBy({
+      id: subscribeId,
+    });
+
+    if (!entity) {
+      throw new BadRequestException('구독 정보가 없습니다.');
+    }
+
+    return entity;
+  }
+
+  async cancel(subscribeId: string): Promise<SubscribeEntity> {
+    await this.update(subscribeId, { cancelledAt: dayjs() });
+    return await this.findOne({
+      where: {
+        id: subscribeId,
+      },
     });
   }
 }

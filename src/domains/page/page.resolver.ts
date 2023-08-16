@@ -1,9 +1,8 @@
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PageInput, Page } from './types';
-import { PageService } from './services/page.service';
 import { MessageResponse } from '../common.dto';
 import { SubscribeInput } from './types/subscribe.input';
-import { SubscribeService } from './services';
+import { SubscribeService, PageService } from './services';
 
 @Resolver(() => Page)
 export class PageResolver {
@@ -23,6 +22,16 @@ export class PageResolver {
     @Args('input') input: SubscribeInput,
   ): Promise<MessageResponse> {
     const message = await this.subscribeService.subscribePage(input);
+    return {
+      message,
+    };
+  }
+
+  @Mutation(() => MessageResponse, { description: '구독 취소' })
+  async cancelSubscribe(
+    @Args('subscribeId', { type: () => ID }) subscribeId: string,
+  ): Promise<MessageResponse> {
+    const message = await this.subscribeService.cancelSubscribe(subscribeId);
     return {
       message,
     };
