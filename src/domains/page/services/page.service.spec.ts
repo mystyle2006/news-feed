@@ -6,7 +6,7 @@ import {
 } from '../../../infra/repository';
 import { PageInput } from '../types';
 
-describe('topic.service.ts', () => {
+describe('page.service.ts', () => {
   let pageService: PageService;
 
   beforeEach(async () => {
