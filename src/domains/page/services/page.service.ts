@@ -3,6 +3,8 @@ import {
   PageEntity,
   PageRepoInterface,
   PageRepoInterfaceName,
+  SubscribeRepoInterface,
+  SubscribeRepoInterfaceName,
 } from '../../../infra/repository';
 import { PageInput } from '../types';
 
@@ -11,6 +13,8 @@ export class PageService {
   constructor(
     @Inject(PageRepoInterfaceName)
     private readonly pageRepository: PageRepoInterface,
+    @Inject(SubscribeRepoInterfaceName)
+    private readonly subscribeRepository: SubscribeRepoInterface,
   ) {}
 
   async createPage(input: PageInput): Promise<PageEntity> {
@@ -19,5 +23,13 @@ export class PageService {
     entity.schoolName = input.schoolName;
 
     return await this.pageRepository.save(entity);
+  }
+
+  async findPages(studentId: string): Promise<PageEntity[]> {
+    const subscribes = await this.subscribeRepository.findByStudentIdWithPage(
+      studentId,
+    );
+
+    return subscribes.map((subscribe) => subscribe.page);
   }
 }

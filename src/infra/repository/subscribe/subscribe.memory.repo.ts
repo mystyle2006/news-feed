@@ -20,4 +20,8 @@ export class SubscribeMemoryRepo implements SubscribeRepoInterface {
         subscribe.page.id === pageId && subscribe.studentId === studentId,
     );
   }
+
+  async findByStudentIdWithPage(studentId: string): Promise<SubscribeEntity[]> {
+    return this.store.filter((subscribe) => subscribe.studentId === studentId);
+  }
 }

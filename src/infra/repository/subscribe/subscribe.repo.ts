@@ -23,4 +23,13 @@ export class SubscribeRepo
       studentId,
     });
   }
+
+  async findByStudentIdWithPage(studentId: string): Promise<SubscribeEntity[]> {
+    return await this.find({
+      where: {
+        studentId,
+      },
+      relations: ['page'],
+    });
+  }
 }

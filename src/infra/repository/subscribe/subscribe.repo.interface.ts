@@ -8,4 +8,5 @@ export interface SubscribeRepoInterface {
     pageId: string,
     studentId: string,
   ): Promise<SubscribeEntity>;
+  findByStudentIdWithPage(studentId: string): Promise<SubscribeEntity[]>;
 }

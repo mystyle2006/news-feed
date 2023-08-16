@@ -11,10 +11,11 @@ export class PageResolver {
     private readonly service: PageService,
     private readonly subscribeService: SubscribeService,
   ) {}
-  @Query(() => String)
-  async page(@Args('id', { type: () => ID }) id: number) {
-    console.log(id);
-    return '';
+  @Query(() => [Page])
+  async pages(
+    @Args('studentId', { type: () => ID }) studentId: string,
+  ): Promise<Page[]> {
+    return await this.service.findPages(studentId);
   }
 
   @Mutation(() => MessageResponse, { description: '학교 페이지 구독' })

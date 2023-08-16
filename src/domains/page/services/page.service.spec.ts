@@ -3,6 +3,8 @@ import { PageService } from './page.service';
 import {
   PageMemoryRepo,
   PageRepoInterfaceName,
+  SubscribeMemoryRepo,
+  SubscribeRepoInterfaceName,
 } from '../../../infra/repository';
 import { PageInput } from '../types';
 
@@ -16,6 +18,10 @@ describe('page.service.ts', () => {
         {
           provide: PageRepoInterfaceName,
           useClass: PageMemoryRepo,
+        },
+        {
+          provide: SubscribeRepoInterfaceName,
+          useClass: SubscribeMemoryRepo,
         },
       ],
     }).compile();
