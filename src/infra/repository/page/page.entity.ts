@@ -1,5 +1,6 @@
-import { Entity, Column, Unique } from 'typeorm';
+import { Entity, Column, Unique, OneToMany } from 'typeorm';
 import { CommonEntity } from '../common.entity';
+import { SubscribeEntity } from '../subscribe';
 
 @Entity('page')
 @Unique(['regionName', 'schoolName'])
@@ -19,4 +20,7 @@ export class PageEntity extends CommonEntity {
     width: 255,
   })
   schoolName: string;
+
+  @OneToMany(() => SubscribeEntity, (subscribe) => subscribe.page)
+  subscribes: SubscribeEntity[];
 }

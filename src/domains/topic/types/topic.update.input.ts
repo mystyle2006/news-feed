@@ -1,5 +1,5 @@
 import { Field, InputType, PickType } from '@nestjs/graphql';
-import { UpdateDto } from '../../common.dto';
+import { UpdateDto } from '../../common.interface';
 import { TopicInput } from './topic.input';
 
 @InputType()

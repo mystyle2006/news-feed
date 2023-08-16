@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { PageResolver } from './page.resolver';
-import { PageRepoModule } from '../../infra/repository';
-import { PageService } from './page.service';
+import { PageRepoModule, SubscribeRepoModule } from '../../infra/repository';
+import { PageService, SubscribeService } from './services';
 
 @Module({
-  imports: [PageRepoModule],
-  providers: [PageResolver, PageService],
+  imports: [PageRepoModule, SubscribeRepoModule],
+  providers: [PageResolver, PageService, SubscribeService],
 })
 export class PageModule {}

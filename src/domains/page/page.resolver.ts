@@ -1,14 +1,30 @@
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PageInput, Page } from './types';
-import { PageService } from './page.service';
+import { PageService } from './services/page.service';
+import { MessageResponse } from '../common.dto';
+import { SubscribeInput } from './types/subscribe.input';
+import { SubscribeService } from './services';
 
 @Resolver(() => Page)
 export class PageResolver {
-  constructor(private readonly service: PageService) {}
+  constructor(
+    private readonly service: PageService,
+    private readonly subscribeService: SubscribeService,
+  ) {}
   @Query(() => String)
   async page(@Args('id', { type: () => ID }) id: number) {
     console.log(id);
     return '';
+  }
+
+  @Mutation(() => MessageResponse, { description: '학교 페이지 구독' })
+  async subscribePage(
+    @Args('input') input: SubscribeInput,
+  ): Promise<MessageResponse> {
+    const message = await this.subscribeService.subscribePage(input);
+    return {
+      message,
+    };
   }
 
   @Mutation(() => Page, { description: '학교 페이지 생성' })

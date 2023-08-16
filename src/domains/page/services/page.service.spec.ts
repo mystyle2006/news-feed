@@ -1,7 +1,10 @@
 import { Test } from '@nestjs/testing';
 import { PageService } from './page.service';
-import { PageMemoryRepo, PageRepoInterfaceName } from '../../infra/repository';
-import { PageInput } from './types';
+import {
+  PageMemoryRepo,
+  PageRepoInterfaceName,
+} from '../../../infra/repository';
+import { PageInput } from '../types';
 
 describe('topic.service.ts', () => {
   let pageService: PageService;

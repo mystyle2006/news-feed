@@ -3,8 +3,8 @@ import {
   PageEntity,
   PageRepoInterface,
   PageRepoInterfaceName,
-} from '../../infra/repository';
-import { PageInput } from './types';
+} from '../../../infra/repository';
+import { PageInput } from '../types';
 
 @Injectable()
 export class PageService {
