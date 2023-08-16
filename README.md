@@ -27,11 +27,7 @@ $ npm run db
 # development
 $ npm run start
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+실행 후 localhost:3000/graphql 접속 
 ```
 
 ## Test
