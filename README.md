@@ -21,6 +21,9 @@ $ npm install
 ## Running the app
 
 ```bash
+# running db
+$ npm run db
+
 # development
 $ npm run start
 
