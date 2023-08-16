@@ -12,7 +12,9 @@ export class PageMemoryRepo implements PageRepoInterface {
   }
 
   async findOneByIdOrThrow(pageId: string): Promise<PageEntity> {
-    const page = this.store.find((page) => page.id === pageId);
+    const page = this.store.find(
+      (page) => page.id === pageId && !page.deletedAt,
+    );
     if (!page) {
       throw new BadRequestException('페이지가 존재하지 않습니다.');
     }

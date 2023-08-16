@@ -26,4 +26,9 @@ export class TopicService {
 
     return await this.topicRepository.save(topicEntity);
   }
+
+  async deleteTopic(topicId: string): Promise<TopicEntity> {
+    const entity = await this.topicRepository.findOneByIdOrThrow(topicId);
+    return await this.topicRepository.softRemove(entity);
+  }
 }
