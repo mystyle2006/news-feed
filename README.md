@@ -3,9 +3,9 @@
 학교 소식을 전달하고 받아보는 '학교소식 뉴스피드' 를 위한 백엔드 구현
 
 ## Spec
-
+- node(>= 18.x)
 - nestjs, graphql, typescript
-- mysql, typeorm
+- mysql(8.0.23), typeorm
 - class-validator, class-transformer, ts-jenum, dayjs
 
 ## [필독] 사전 조건
