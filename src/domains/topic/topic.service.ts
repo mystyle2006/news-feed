@@ -1,7 +1,9 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import {
   PageRepoInterface,
   PageRepoInterfaceName,
+  SubscribeRepoInterface,
+  SubscribeRepoInterfaceName,
   TopicEntity,
   TopicRepoInterface,
   TopicRepoInterfaceName,
@@ -16,6 +18,8 @@ export class TopicService {
     private readonly topicRepository: TopicRepoInterface,
     @Inject(PageRepoInterfaceName)
     private readonly pageRepository: PageRepoInterface,
+    @Inject(SubscribeRepoInterfaceName)
+    private readonly subscribeRepository: SubscribeRepoInterface,
   ) {}
 
   async updateTopic(input: TopicUpdateInput): Promise<TopicEntity> {
@@ -24,6 +28,19 @@ export class TopicService {
 
     await this.topicRepository.update(input.id, entity);
     return entity;
+  }
+
+  async findTopics(studentId: string, pageId: string): Promise<TopicEntity[]> {
+    const subscribe =
+      await this.subscribeRepository.findOneByPageIdAndStudentId(
+        pageId,
+        studentId,
+      );
+    if (!subscribe) {
+      throw new BadRequestException('구독 중인 페이지가 아닙니다.');
+    }
+
+    return await this.topicRepository.findByPageId(pageId);
   }
 
   async createTopic(input: TopicInput): Promise<TopicEntity> {

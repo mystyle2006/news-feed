@@ -6,6 +6,7 @@ export const TopicRepoInterfaceName = 'topicRepo';
 export interface TopicRepoInterface {
   save(entity: TopicEntity): Promise<TopicEntity>;
   findOneByIdOrThrow(topicId: string): Promise<TopicEntity>;
+  findByPageId(pageId: string): Promise<TopicEntity[]>;
   softRemove(entity: TopicEntity): Promise<TopicEntity>;
   update(
     id: string,

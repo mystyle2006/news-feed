@@ -1,11 +1,21 @@
-import { Args, ID, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { TopicInput, Topic } from './types';
 import { TopicService } from './topic.service';
 import { TopicUpdateInput } from './types/topic.update.input';
+import { Page } from '../page/types';
 
 @Resolver(() => Topic)
 export class TopicResolver {
   constructor(private readonly service: TopicService) {}
+
+  @Query(() => [Topic])
+  async topics(
+    @Args('studentId', { type: () => ID }) studentId: string,
+    @Args('pageId', { type: () => ID }) pageId: string,
+  ): Promise<Topic[]> {
+    const entities = await this.service.findTopics(studentId, pageId);
+    return entities.map((entity) => Topic.from(entity));
+  }
 
   @Mutation(() => Topic, { description: '새로운 토픽 생성' })
   async createTopic(@Args('input') input: TopicInput): Promise<Topic> {

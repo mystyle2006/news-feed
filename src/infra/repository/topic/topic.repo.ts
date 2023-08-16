@@ -24,4 +24,15 @@ export class TopicRepo
 
     return topicEntity;
   }
+
+  async findByPageId(pageId: string): Promise<TopicEntity[]> {
+    return await this.find({
+      where: {
+        page: {
+          id: pageId,
+        },
+      },
+      order: { createdAt: 'desc' },
+    });
+  }
 }

@@ -14,7 +14,8 @@ export class PageResolver {
   async pages(
     @Args('studentId', { type: () => ID }) studentId: string,
   ): Promise<Page[]> {
-    return await this.service.findPages(studentId);
+    const pageEntities = await this.service.findPages(studentId);
+    return pageEntities.map((entity) => Page.from(entity));
   }
 
   @Mutation(() => MessageResponse, { description: '학교 페이지 구독' })

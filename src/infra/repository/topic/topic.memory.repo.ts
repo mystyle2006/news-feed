@@ -25,6 +25,10 @@ export class TopicMemoryRepo implements TopicRepoInterface {
     return topic;
   }
 
+  async findByPageId(pageId: string): Promise<TopicEntity[]> {
+    return this.store.filter((topic) => topic.page.id === pageId);
+  }
+
   async softRemove(entity: TopicEntity): Promise<TopicEntity> {
     this.store = this.store.map((topic) => {
       if (topic.id === entity.id) {
