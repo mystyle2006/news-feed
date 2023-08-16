@@ -17,7 +17,7 @@ export class TopicService {
     private readonly pageRepository: PageRepoInterface,
   ) {}
 
-  async createPage(input: TopicInput): Promise<TopicEntity> {
+  async createTopic(input: TopicInput): Promise<TopicEntity> {
     const page = await this.pageRepository.findOneByIdOrThrow(input.pageId);
 
     const topicEntity = new TopicEntity();
