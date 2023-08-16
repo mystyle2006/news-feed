@@ -4,7 +4,7 @@ import {
   PageRepoInterface,
   PageRepoInterfaceName,
 } from '../../infra/repository';
-import { Page, PageInput } from './types';
+import { PageInput } from './types';
 
 @Injectable()
 export class PageService {

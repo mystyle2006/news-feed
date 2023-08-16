@@ -1,12 +1,40 @@
-import { CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  CreateDateColumn,
+  DeleteDateColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import * as dayjs from 'dayjs';
+import { DateTransformer } from './transformer';
 
 export class CommonEntity {
-  @CreateDateColumn()
-  createdAt: Date;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @UpdateDateColumn()
-  updatedAt: Date;
+  @CreateDateColumn({
+    transformer: DateTransformer,
+  })
+  createdAt: dayjs.Dayjs;
 
-  @DeleteDateColumn()
-  deletedAt: Date;
+  @UpdateDateColumn({
+    transformer: DateTransformer,
+  })
+  updatedAt: dayjs.Dayjs;
+
+  @DeleteDateColumn({
+    transformer: DateTransformer,
+    nullable: true,
+  })
+  deletedAt: dayjs.Dayjs;
+
+  @BeforeInsert()
+  setCreatedAt() {
+    this.createdAt = dayjs();
+  }
+
+  @BeforeInsert()
+  setUpdatedAt() {
+    this.updatedAt = dayjs();
+  }
 }

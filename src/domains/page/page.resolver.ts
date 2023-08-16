@@ -12,7 +12,7 @@ export class PageResolver {
   }
 
   @Mutation(() => Page, { description: '학교 페이지 생성' })
-  async create(@Args('input') input: PageInput): Promise<Page> {
+  async createPage(@Args('input') input: PageInput): Promise<Page> {
     const result = await this.service.createPage(input);
     return Page.from(result);
   }

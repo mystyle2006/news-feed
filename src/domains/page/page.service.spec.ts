@@ -3,7 +3,7 @@ import { PageService } from './page.service';
 import { PageMemoryRepo, PageRepoInterfaceName } from '../../infra/repository';
 import { PageInput } from './types';
 
-describe('page.service.ts', () => {
+describe('topic.service.ts', () => {
   let pageService: PageService;
 
   beforeEach(async () => {

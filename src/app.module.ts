@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { PageModule } from './domains/page/page.module';
+import { PageModule, TopicModule } from './domains';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PageRepoModule } from './infra/repository';
 
 @Module({
   imports: [
@@ -26,7 +25,7 @@ import { PageRepoModule } from './infra/repository';
       autoSchemaFile: true,
     }),
     PageModule,
-    PageRepoModule,
+    TopicModule,
   ],
   controllers: [],
   providers: [],
